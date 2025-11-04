@@ -1,4 +1,4 @@
-package com.itec4260;
+package itec4260test;
 
 import java.sql.*;
 import java.util.ArrayList;

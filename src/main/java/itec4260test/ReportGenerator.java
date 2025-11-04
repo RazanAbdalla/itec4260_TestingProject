@@ -1,4 +1,4 @@
-package com.itec4260;
+package itec4260test;
 
 import org.apache.poi.xwpf.usermodel.*;
 import java.io.FileOutputStream;

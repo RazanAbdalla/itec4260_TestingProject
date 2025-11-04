@@ -1,4 +1,4 @@
-package com.itec4260;
+package itec4260test;
 
 public class HotelPrice {
     private int id;
