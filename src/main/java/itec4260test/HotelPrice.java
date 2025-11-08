@@ -6,6 +6,8 @@ public class HotelPrice {
     private String city;
     private String date;
     private double price;
+    private WebScraper webScraper;
+    private BookingHotelScraper bookingHotelScraper;
 
     public HotelPrice(String hotelName, String city, String date, double price) {
         this.hotelName = hotelName;
@@ -13,6 +15,11 @@ public class HotelPrice {
         this.date = date;
         this.price = price;
     }
+    public HotelPrice(WebScraper webScraper, BookingHotelScraper bookingHotelScraper) {
+        this.webScraper = webScraper;
+        this.bookingHotelScraper = bookingHotelScraper;
+    }
+
 
     // Getters and Setters
     public int getId() { return id; }
@@ -29,4 +36,11 @@ public class HotelPrice {
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+    public void setHotel(String hotelName, String city, String date, double price) {
+        this.hotelName = hotelName;
+        this.city = city;
+        this.date = date;
+        this.price = price;
+    }
+
 }

@@ -1,32 +1,34 @@
 package itec4260test;
 
-import org.apache.poi.xwpf.usermodel.*;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class ReportGenerator {
 
+    private static final String FILE_NAME = "All_Hotels_Report.csv";
+
     public void generateReport(List<HotelPrice> list, String hotelName, String city) {
-        XWPFDocument doc = new XWPFDocument();
+        try (FileWriter writer = new FileWriter(FILE_NAME, true)) { // 'true' for append mode
 
-        XWPFParagraph p = doc.createParagraph();
-        XWPFRun run = p.createRun();
-        run.setText("Top 10 Lowest Prices for " + hotelName + " in " + city);
+            // Add a title for this hotel/city
+            writer.append("\n===============================\n");
+            writer.append("Top 10 Lowest Prices for ").append(hotelName).append(" in ").append(city).append("\n");
+            writer.append("===============================\n");
 
-        XWPFTable table = doc.createTable();
-        XWPFTableRow header = table.getRow(0);
-        header.getCell(0).setText("Date");
-        header.addNewTableCell().setText("Price");
+            // Write header for this section
+            writer.append("Date,Price\n");
 
-        for (HotelPrice hp : list) {
-            XWPFTableRow row = table.createRow();
-            row.getCell(0).setText(hp.getDate());
-            row.getCell(1).setText(String.valueOf(hp.getPrice()));
-        }
+            // Write each hotel price
+            for (HotelPrice hp : list) {
+                writer.append(hp.getDate()).append(",").append(String.valueOf(hp.getPrice())).append("\n");
+            }
 
-        try (FileOutputStream out = new FileOutputStream("Report_" + city + "_" + hotelName + ".docx")) {
-            doc.write(out);
+            // Add a blank line for separation
+            writer.append("\n");
+
+            System.out.println("Added report for " + hotelName + " in " + city);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

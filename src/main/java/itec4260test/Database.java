@@ -12,10 +12,11 @@ public class Database {
     private static final Logger logger = LogManager.getLogger(Database.class);
     private static final String DB_URL = "jdbc:sqlite:hotel_prices.db";
 
-    /** Connect to SQLite database */
+    /** Connect to SQLite database with auto-commit enabled */
     public static Connection connect() {
         try {
             Connection conn = DriverManager.getConnection(DB_URL);
+            conn.setAutoCommit(true); // ensures inserts/updates are saved immediately
             logger.info("Connected to database: " + DB_URL);
             return conn;
         } catch (SQLException e) {
